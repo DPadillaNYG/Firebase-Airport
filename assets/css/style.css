@@ -1,0 +1,70 @@
+/* font-family: 'VT323', monospace; */
+
+body {
+  background: rgb(56, 64, 72);
+}
+
+#sticky-footer {
+  min-height: calc(100vh - 80px);
+}
+
+footer {
+  height: 80px;
+  background: dimgrey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Jura", sans-serif;
+  font-size: 37px;
+  color: white;
+  letter-spacing: 2px;
+  border-top: solid white 5px;
+}
+
+header {
+  height: 95px;
+  background: rgb(26, 45, 99);
+  color: white;
+}
+
+#departure-div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  height: 100%;
+}
+
+#clock {
+  margin: 0;
+  font-size: 28px;
+  font-family: "Jura", sans-serif;
+  position: absolute;
+  right: 25px;
+}
+
+.fa-plane-departure {
+  background: white;
+  height: 55px;
+  width: 55px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-size: 27px;
+  color: rgb(26, 45, 99);
+}
+
+#airport-logo {
+  width: 120px;
+  position: absolute;
+  left: 25px;
+}
+
+#departure-h1 {
+  font-family: "Jura", sans-serif;
+  font-size: 60px;
+  margin: 0;
+}
