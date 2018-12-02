@@ -9,16 +9,15 @@ body {
 }
 
 footer {
-  height: 80px;
-  background: dimgrey;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Jura", sans-serif;
-  font-size: 37px;
+  font-size: 20px;
+  background: rgb(26, 45, 99);
   color: white;
-  letter-spacing: 2px;
-  border-top: solid white 5px;
+  margin-top: 20px;
 }
 
 header {
@@ -27,7 +26,7 @@ header {
   color: white;
 }
 
-#departure-div {
+#flight-div {
   position: relative;
   display: flex;
   justify-content: center;
@@ -63,8 +62,35 @@ header {
   left: 25px;
 }
 
-#departure-h1 {
+#flight-h1 {
   font-family: "Jura", sans-serif;
   font-size: 60px;
   margin: 0;
+}
+
+label {
+  color: white;
+  margin-left: 12px;
+}
+
+.form-control {
+  border-radius: inherit;
+  width: calc(100% - 24px);
+  margin: auto;
+  color: rgb(33, 37, 40);
+}
+
+.form-group {
+  margin-top: -5px;
+  font-family: "Jura", sans-serif;
+  letter-spacing: 5px;
+}
+
+.btn {
+  border-radius: 0;
+  margin-left: 12px;
+  font-family: "Jura", sans-serif;
+  background: rgb(44, 48, 51);
+  color: white;
+  border: solid white 1px;
 }

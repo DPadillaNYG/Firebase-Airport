@@ -23,20 +23,20 @@
       rel="stylesheet"
     />
 
-    <title>Giffeine - Coffee Gif Central</title>
+    <title>Flight Times</title>
   </head>
 
   <body>
     <div id="sticky-footer">
       <header>
-        <div id="departure-div">
+        <div id="flight-div">
           <img
             src="assets/images/RDU Logo.png"
             alt="RDU Airport Logo"
             id="airport-logo"
           />
           <i class="fas fa-plane-departure"></i>
-          <h1 id="departure-h1">DEPARTURES</h1>
+          <h1 id="flight-h1">FLIGHT TIMES</h1>
           <p id="clock"></p>
         </div>
       </header>
@@ -61,25 +61,51 @@
               <td>11:20 AM</td>
             </tr>
             <tr>
-              <td>DELTA AIRLINES</td>
-              <td>10:35 AM</td>
-              <td>08:04:32</td>
-              <td>FLORENCE, ITALY</td>
-              <td>11:20 AM</td>
+              <td>SOUTHWEST AIRLINES</td>
+              <td>01:25 PM</td>
+              <td>03:20:25</td>
+              <td>JERUSALEM, ISRAEL</td>
+              <td>02:10 PM</td>
             </tr>
             <tr>
-              <td>DELTA AIRLINES</td>
-              <td>10:35 AM</td>
-              <td>08:04:32</td>
-              <td>FLORENCE, ITALY</td>
-              <td>11:20 AM</td>
+              <td>UNITED AIRLINES</td>
+              <td>03:30 PM</td>
+              <td>00:10:45</td>
+              <td>PARIS, FRANCE</td>
+              <td>04:15 PM</td>
             </tr>
           </tbody>
         </table>
+
+        <form>
+          <div class="form-group">
+            <label for="airline">AIRLINE</label>
+            <input type="text" class="form-control" id="airline" />
+          </div>
+
+          <div class="form-group">
+            <label for="arrival">ARRIVAL TIME</label>
+            <input
+              type="text"
+              class="form-control"
+              id="arrival"
+              placeholder="10:00 AM"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="destination">DESTINATION</label>
+            <input type="text" class="form-control" id="destination" />
+          </div>
+
+          <button class="btn btn-default" id="submit" type="button">
+            SUBMIT
+          </button>
+        </form>
       </main>
     </div>
 
-    <footer>&copy 2018 COPYRIGHT - AIRPORT</footer>
+    <footer>&copy 2018 COPYRIGHT - FLIGHT TIMES</footer>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.js"
