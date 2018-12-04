@@ -12,6 +12,19 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var time;
 
+// This function provides a realtime ticking clock
+function displayTime() {
+  time = moment().format("LTS");
+  $("#clock").html(time);
+
+  updateStatusCountdowns();
+
+  setTimeout(displayTime, 1000); // Recursive Function
+}
+
+// Function Calls
+displayTime();
+
 $("#submit").on("click", function(e) {
   e.preventDefault();
 
@@ -25,41 +38,41 @@ $("#submit").on("click", function(e) {
     .toLowerCase()
     .trim();
 
-  var statusUpdates = setInterval(function() {
-    var a = moment(time, "hhmmssa");
-    var b = moment(arrivalTime, "hhmmssa");
-    var results = b.diff(a, "seconds");
+  //   var statusUpdates = setInterval(function() {
+  //     var a = moment(time, "hhmmssa");
+  //     var b = moment(arrivalTime, "hhmmssa");
+  //     var results = b.diff(a, "seconds");
 
-    if (results < 0) {
-      results = 86400 + results;
-    }
+  //     if (results < 0) {
+  //       results = 86400 + results;
+  //     }
 
-    var hours = Math.floor(results / 3600);
-    var minutes = Math.floor((results - hours * 60 * 60) / 60);
-    var seconds = results - hours * 60 * 60 - minutes * 60;
+  //     var hours = Math.floor(results / 3600);
+  //     var minutes = Math.floor((results - hours * 60 * 60) / 60);
+  //     var seconds = results - hours * 60 * 60 - minutes * 60;
 
-    if (hours === 0 || hours < 10) {
-      hours = "0" + hours;
-    }
+  //     if (hours === 0 || hours < 10) {
+  //       hours = "0" + hours;
+  //     }
 
-    if (minutes === 0 || minutes < 10) {
-      minutes = "0" + minutes;
-    }
+  //     if (minutes === 0 || minutes < 10) {
+  //       minutes = "0" + minutes;
+  //     }
 
-    if (seconds === 0 || seconds < 10) {
-      seconds = "0" + seconds;
-    }
+  //     if (seconds === 0 || seconds < 10) {
+  //       seconds = "0" + seconds;
+  //     }
 
-    if (hours === "00" && minutes === "00" && seconds === "00") {
-      clearInterval(statusUpdates);
-      var status = "EXPIRED";
-    } else {
-      var status = hours + ":" + minutes + ":" + seconds;
-    }
+  //     if (hours === "00" && minutes === "00" && seconds === "00") {
+  //       clearInterval(statusUpdates);
+  //       var status = "EXPIRED";
+  //     } else {
+  //       var status = hours + ":" + minutes + ":" + seconds;
+  //     }
 
-    console.log(status);
-    return status;
-  }, 1000);
+  //     console.log(status);
+  //     return status;
+  //   }, 1000);
 
   var destination = $("#destination")
     .val()
@@ -73,15 +86,87 @@ $("#submit").on("click", function(e) {
   database.ref().push({
     airline: airline,
     arrivalTime: arrivalTime,
-    status: statusUpdates,
     destination: destination,
     departure: departureTime
   });
 
-  airline = $("#airline").val("");
-  arrivalTime = $("#arrival").val("");
-  destination = $("#destination").val("");
+  //   airline = $("#airline").val("");
+  //   arrivalTime = $("#arrival").val("");
+  //   destination = $("#destination").val("");
 });
+
+function updateClocks() {}
+
+function updateStatusCountdowns() {
+  //var countdownIntervalRef = setInterval(function() {
+  var $statusesToUpdate = $("[jsArrivalTimeCountdown]");
+
+  $statusesToUpdate.each(function(index, statusElement) {
+    let $status = $(statusElement);
+    let arrivalTime = $status.attr("jsArrivalTimeCountdown");
+    let statusDisplay = "";
+
+    if (arrivalTime === "EXPIRED") return;
+
+    let a = moment(time, "hhmmssa");
+    let b = moment(arrivalTime, "hhmmssa");
+    let results = b.diff(a, "seconds");
+
+    if (results < 0) results = 86400 + results;
+
+    let hours = Math.floor(results / 3600);
+    let minutes = Math.floor((results - hours * 60 * 60) / 60);
+    let seconds = results - hours * 60 * 60 - minutes * 60;
+
+    if (hours === 0 || hours < 10) hours = "0" + hours;
+
+    if (minutes === 0 || minutes < 10) minutes = "0" + minutes;
+
+    if (seconds === 0 || seconds < 10) seconds = "0" + seconds;
+
+    if (hours === "00" && minutes === "00" && seconds === "00") {
+      //clearInterval(countdownIntervalRef);
+      //updateStatusDisplay("EXPIRED", airlineData.statusElementId);
+      statusDisplay = "EXPIRED";
+      $status.attr("jsArrivalTimeCountdown", "EXPIRED");
+    }
+    //updateStatusDisplay("EXPIRED", airlineData.statusElementId);
+    else statusDisplay = hours + ":" + minutes + ":" + seconds;
+
+    $status.html(statusDisplay);
+  });
+
+  // var a = moment(time, "hhmmssa");
+  // var b = moment(arrivalTime, "hhmmssa");
+  // var results = b.diff(a, "seconds");
+
+  // if (results < 0) results = 86400 + results;
+
+  // var hours = Math.floor(results / 3600);
+  // var minutes = Math.floor((results - hours * 60 * 60) / 60);
+  // var seconds = results - hours * 60 * 60 - minutes * 60;
+
+  // if (hours === 0 || hours < 10) hours = "0" + hours;
+
+  // if (minutes === 0 || minutes < 10) minutes = "0" + minutes;
+
+  // if (seconds === 0 || seconds < 10) seconds = "0" + seconds;
+
+  // if (hours === "00" && minutes === "00" && seconds === "00") {
+  //   clearInterval(countdownIntervalRef);
+  //   //updateStatusDisplay("EXPIRED", airlineData.statusElementId);
+  //   var status = "EXPIRED";
+  // }
+  // //updateStatusDisplay("EXPIRED", airlineData.statusElementId);
+  // else var status = hours + ":" + minutes + ":" + seconds;
+
+  //updateStatusDisplay(status, statusElementId);
+  //}, 1000);
+}
+
+// function updateStatusDisplay(status, statusElementId) {
+//   $("#" + statusElementId).html(status);
+// }
 
 database.ref().on("child_added", function(snapshot) {
   var firebaseData = snapshot.val();
@@ -91,7 +176,11 @@ database.ref().on("child_added", function(snapshot) {
 
   var displayAirline = $("<td>").html(firebaseData.airline);
   var displayArrival = $("<td>").html(firebaseData.arrivalTime);
-  var displayStatus = $("<td>").html(firebaseData.status);
+  // let statusElementId = "status" + airlineCount++;
+  var displayStatus = $("<td>").attr(
+    "jsArrivalTimeCountdown",
+    firebaseData.arrivalTime
+  );
   var displayDepartingTo = $("<td>").html(firebaseData.destination);
   var displayDeparture = $("<td>").html(firebaseData.departure);
 
@@ -103,50 +192,42 @@ database.ref().on("child_added", function(snapshot) {
       .append(displayDepartingTo)
       .append(displayDeparture)
   );
+
+  //startClock(firebaseData.arrivalTime, statusElementId);
 });
 
-// This function provides a realtime ticking clock
-function displayTime() {
-  time = moment().format("LTS");
-  $("#clock").html(time);
-  setTimeout(displayTime, 1000); // Recursive Function
-  console.log("Hi");
-}
+// var test = setInterval(function() {
+//   var timeTest = "11:50AM";
+//   var a = moment(time, "hhmmssa");
+//   var b = moment(timeTest, "hhmmssa");
+//   var results = b.diff(a, "seconds");
 
-// Function Calls
-displayTime();
+//   if (results < 0) {
+//     results = 86400 + results;
+//   }
 
-var TA_Test = setInterval(function() {
-  var timeTest = "11:50AM";
-  var a = moment(time, "hhmmssa");
-  var b = moment(timeTest, "hhmmssa");
-  var results = b.diff(a, "seconds");
+//   var hours = Math.floor(results / 3600);
+//   var minutes = Math.floor((results - hours * 60 * 60) / 60);
+//   var seconds = results - hours * 60 * 60 - minutes * 60;
 
-  if (results < 0) {
-    results = 86400 + results;
-  }
+//   if (hours === 0 || hours < 10) {
+//     hours = "0" + hours;
+//   }
 
-  var hours = Math.floor(results / 3600);
-  var minutes = Math.floor((results - hours * 60 * 60) / 60);
-  var seconds = results - hours * 60 * 60 - minutes * 60;
+//   if (minutes === 0 || minutes < 10) {
+//     minutes = "0" + minutes;
+//   }
 
-  if (hours === 0 || hours < 10) {
-    hours = "0" + hours;
-  }
+//   if (seconds === 0 || seconds < 10) {
+//     seconds = "0" + seconds;
+//   }
 
-  if (minutes === 0 || minutes < 10) {
-    minutes = "0" + minutes;
-  }
-
-  if (seconds === 0 || seconds < 10) {
-    seconds = "0" + seconds;
-  }
-
-  if (hours === "00" && minutes === "00" && seconds === "00") {
-    clearInterval(jordanTest);
-    var status = "EXPIRED";
-  } else {
-    var status = hours + ":" + minutes + ":" + seconds;
-  }
-  console.log(status);
-}, 1000);
+//   if (hours === "00" && minutes === "00" && seconds === "00") {
+//     clearInterval(jordanTest);
+//     var status = "EXPIRED";
+//   } else {
+//     var status = hours + ":" + minutes + ":" + seconds;
+//   }
+//   console.log(status);
+//   return status;
+// }, 1000);
