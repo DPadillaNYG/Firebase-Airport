@@ -47,6 +47,7 @@ $("#submit").on("click", function(e) {
     .format("hh:mma")
     .toLowerCase();
 
+  // Pushing information to Firebase on the click event
   database.ref().push({
     airline: airline,
     arrivalTime: arrivalTime,
@@ -59,6 +60,7 @@ $("#submit").on("click", function(e) {
   $("#destination").val("");
 });
 
+// This function provides a real-time countdown timer based on the current time
 function updateStatusCountdowns() {
   var $statusesToUpdate = $("[jsArrivalTimeCountdown]");
 
@@ -94,6 +96,7 @@ function updateStatusCountdowns() {
   });
 }
 
+// This retrieves data from Firebase and posts it to the existing table
 database.ref().on("child_added", function(snapshot) {
   var firebaseData = snapshot.val();
 

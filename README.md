@@ -1,29 +1,51 @@
-In this assignment, you'll create a train schedule application that incorporates Firebase to host arrival and departure data. Your app will retrieve and manipulate this information with Moment.js. This website will provide up-to-date information about various trains, namely their arrival times and how many minutes remain until they arrive at their station.
+# Website w/ Firebase & Moment.js Implementation
 
-### Instructions
+A website utilizing Firebase for airport schedules.
 
-- Make sure that your app suits this basic spec:
+### Link to Game
 
-  - When adding trains, administrators should be able to submit the following:
+https://dpadillanyg.github.io/Firebase-Airport/
 
-    <!-- - Train Name -->
+**Browser compatibility checked with:**
 
-    <!-- - Destination -->
+- Google Chrome - Version 70.0.3538.77 and up
+- Firefox Developer Edition - 64.0b8 (64-bit) and up (download feature doesn't work)
+- Safari - Version 12.0.1 and up
 
-    <!-- - First Train Time -- in military time -->
+### Assignment
 
-    <!-- - Frequency -- in minutes -->
+I was tasked with having to make a website using Firebase and Moment.js to become more
+familiar with sending and recieving things from databases. For this project I choose to
+focus on flight schedules: Being in the administrator seat and updating an airport schedule
+that automatically shows a timer counting down to it's arrival based on the current clock
+while also updating it's departure time by accomadating 45m automatically. I referenced
+alot of airport flight schedule screens for the look and decided to make an alternative
+application for the RDU administration. The Raleigh Durham International Airport.
 
-  <!-- - Code this app to calculate when the next train will arrive; this should be relative to the current time. -->
+### Skills Learned
 
-  <!-- - Users from many different machines must be able to view same train times. -->
+I learned many things while doing this project with the support of my wife
+who is also a very talented programmer and Stack Overflow. Here are some things
+I learned on the fly:
 
-  <!-- - Styling and theme are completely up to you. Get Creative! -->
+- recursive functions
+- .format() - Moment.js
+- .add() - Moment.js
+- .diff() - Moment.js
 
-### Bonus (Extra Challenges)
+**Also, feel free to refer to the comments within logic.js to see how I integrated:**
 
-<!-- - Consider updating your "minutes to arrival" and "next train time" text once every minute. This is significantly more challenging; only attempt this if you've completed the actual activity and committed it somewhere on GitHub for safekeeping (and maybe create a second GitHub repo). -->
+- Moment.js
+- Firebase
+- tables
 
-- Try adding `update` and `remove` buttons for each train. Let the user edit the row's elements-- allow them to change a train's Name, Destination and Arrival Time (and then, by relation, minutes to arrival).
+### Comments
 
-- As a final challenge, make it so that only users who log into the site with their Google or GitHub accounts can use your site. You'll need to read up on Firebase authentication for this bonus exercise.
+The biggest feature I added that I am most proud of would have to be the clock that counts
+down once the flight schedule is added. It informs the public how long until the flight arrives
+based on the current time. It also expires when the time has ran out. There was alot more I
+would've like to have added to this project, but I had a huge group project incoming that I need
+to devote all my time and energy too. I spent a good two to three days on this as opposed to my usual
+week.
+
+_created by David M. Padilla_
