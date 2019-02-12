@@ -1,10 +1,10 @@
-# Website w/ Firebase & Moment.js Implementation
+# Flight Times
 
-A website utilizing Firebase for airport schedules.
+A website utilizing Firebase & Moment.js for airport schedules.
 
 ### Link to Game
 
-https://dpadillanyg.github.io/Firebase-Airport/
+https://dpadillajs.github.io/FlightTimes/
 
 **Browser compatibility checked with:**
 
